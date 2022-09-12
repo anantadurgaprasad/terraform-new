@@ -9,3 +9,8 @@ output "private-sg-id" {
 output "public-sg-id" {
   value=aws_security_group.public_sg.id  
 }
+
+output "lb-sg-id" {
+  value = aws_security_group.lb_sg.id
+  
+}
