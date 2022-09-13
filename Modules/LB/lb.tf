@@ -5,13 +5,7 @@ resource "aws_lb" "load_balancer" {
   security_groups    = "${var.lb-sg}"
   subnets            = "${var.lb-subnets}"
 
-  enable_deletion_protection = true
 
-  # access_logs {
-  #   bucket  = aws_s3_bucket.lb_logs.bucket
-  #   prefix  = "test-lb"
-  #   enabled = true
-  # }
 
   tags = {
     Environment = "production"
@@ -29,6 +23,7 @@ resource "aws_lb_listener" "test" {
   load_balancer_arn = aws_lb.load_balancer.arn
   port              = "80"
   protocol          = "HTTP"
+  
   
   default_action {
     type             = "forward"

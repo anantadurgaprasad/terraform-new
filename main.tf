@@ -125,7 +125,7 @@ module "nat" {
 }
 
 
-
+/*
 module "private-ec2" {
   source = "./Modules/ec2"
   ec2-name = "terraform-private-ec2"
@@ -146,7 +146,7 @@ module "public-ec2" {
   sg = [module.new_vpc.public-sg-id]
   public-ip = true
 }
-
+*/
 # resource "aws_network_interface" "private-ec2-network_interface" {
 #   subnet_id       = module.private_subnet_2.id
   
@@ -182,22 +182,43 @@ module "load-balancer" {
   
 }
 
-resource "aws_lb_target_group_attachment" "lb-tg" {
-  target_group_arn = module.load-balancer.tg-arn
-  target_id = module.private-ec2.ec2-id
-  port = 80
+# resource "aws_lb_target_group_attachment" "lb-tg" {
+#   target_group_arn = module.load-balancer.tg-arn
+#   target_id = module.private-ec2.ec2-id
+#   port = 80
 
   
-}
-resource "aws_lb_target_group_attachment" "lb-tg2" {
-  target_group_arn = module.load-balancer.tg-arn
-  target_id = module.public-ec2.ec2-id
-  port = 80
+# }
+# resource "aws_lb_target_group_attachment" "lb-tg2" {
+#   target_group_arn = module.load-balancer.tg-arn
+#   target_id = module.public-ec2.ec2-id
+#   port = 80
 
+  
+# }
+module "launch-template" {
+  source = "./Modules/LC"
+  ami-id = "ami-0f36dcfcc94112ea1"
+  inst-type = "t2.micro"
+  key-pair = data.aws_key_pair.example.key_name
+  sg-ids = [module.new_vpc.private-sg-id]
+  subnet-id = module.private_subnet_2.id
+  
+}
+
+module "asg" {
+  source = "./Modules/ASG"
+  tg-arn = module.load-balancer.tg-arn
+  lc-id = module.launch-template.lc-id
+  desired-capacity = 1
+  max-size = 1
+  min-size = 1
   
 }
 
 
+
+/*
 
 resource "aws_db_subnet_group" "default" {
   name       = "terraform-subnet-group"
@@ -248,3 +269,4 @@ module "rds" {
   rds-sg = [aws_security_group.aws_db_sg.id]
   
 }
+*/
