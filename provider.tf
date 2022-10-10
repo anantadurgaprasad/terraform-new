@@ -8,7 +8,7 @@
 # }
 terraform {
   backend "s3" {
-    bucket = "terraform-state-file-bucket-durga"
+    bucket = "terraform-state-bucket-durga"
     key    = "terraform.tfstate"
     region = "ap-south-1"
   }

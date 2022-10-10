@@ -1,3 +1,11 @@
+variable "env" {
+  default = "prod"
+  
+}
+variable "app-name" {
+  default = "memberportal-team1"
+  
+}
 variable "vpc-cidr" {
     default="10.0.0.0/16"
   
@@ -6,21 +14,36 @@ variable "vpc-cidr" {
   
 # }
 variable "vpc-region" {
-    default = "ap-northeast-1"
+    default = "ap-northeast-2"
   
 }
 variable "az" {
-  default = ["ap-northeast-1a","ap-northeast-1c"]
-}
-variable "public_subnet" {
-  default="10.0.1.0/24"
+  default = ["ap-northeast-2a","ap-northeast-2b","ap-northeast-2c"]
 }
 
-variable "private_subnet_1" {
-    default = "10.0.2.0/24"
+variable "subnets_cidr" {
+  # count = 4
+  # default = cidrsubnet("10.0.0.0/16",8,count+1)
+  default = ["10.0.1.0/24" , "10.0.2.0/24" , "10.0.3.0/24" , "10.0.4.0/24"]
   
 }
-variable "private_subnet_2" {
-    default = "10.0.3.0/24"
-  
+variable "buckets" {
+  default = ["cloudfront" , "env"]
+}
+
+variable "db-name" {
+  default = "teamadb"
+}
+variable "rds-engine" {
+  default = "aurora-postgresql"
+}
+variable "rds-engine-version" {
+  default = "12.8"
+}
+variable "ec2-policy-arns" {
+  default = ["arn:aws:iam::aws:policy/AmazonS3FullAccess","arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"]
+}
+
+variable "cd-policy-arn" {
+  default = ["arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"]
 }

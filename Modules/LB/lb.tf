@@ -7,19 +7,23 @@ resource "aws_lb" "load_balancer" {
 
 
 
-  tags = {
-    Environment = "production"
-  }
 }
 
-resource "aws_lb_target_group" "test" {
-  name     = "${var.tg-name}"
-  port     = 80
+resource "aws_lb_target_group" "tg" {
+  name = "${var.tg-name}"
+  port     = 8080
   protocol = "HTTP"
   vpc_id   = "${var.vpc-id}"
+   lifecycle {
+    create_before_destroy = true
+    ignore_changes = [
+      name
+    ]
+  }
+  
 }
 
-resource "aws_lb_listener" "test" {
+resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_lb.load_balancer.arn
   port              = "80"
   protocol          = "HTTP"
@@ -27,6 +31,6 @@ resource "aws_lb_listener" "test" {
   
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.test.arn
+    target_group_arn = aws_lb_target_group.tg.arn
   }
 }
