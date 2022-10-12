@@ -1,6 +1,6 @@
 resource "aws_instance" "ec2" {
-  ami           = "ami-0c76973fbe0ee100c"
-  instance_type = "t2.micro"
+  ami           = "${var.ami-id}"
+  instance_type = "${var.instance-type}"
   key_name = "${var.key-name}"
   # availability_zone = "${var.az}"
   subnet_id = "${var.subnet-id}"

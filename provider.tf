@@ -8,9 +8,9 @@
 # }
 terraform {
   backend "s3" {
-    bucket = "terraform-state-bucket-durga"
-    key    = "terraform.tfstate"
-    region = "ap-south-1"
+    bucket = "prod-memberportal-team1-env"
+    key    = "statefile/terraform.tfstate"
+    region = "ap-northeast-1"
   }
 }
 

@@ -1,4 +1,4 @@
-resource "aws_db_subnet_group" "default" {
+resource "aws_db_subnet_group" "db_subnet_group" {
   name       = "${var.subnet-group-name}"
   subnet_ids = "${var.subnet-group-ids}"
 
@@ -23,7 +23,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   
   identifier         = "${var.rds-name}"
   cluster_identifier = aws_rds_cluster.postgresql.id
-  instance_class     = "db.r4.large"
+  instance_class     = "${var.db_instance_type}"
   engine             = aws_rds_cluster.postgresql.engine
   engine_version     = aws_rds_cluster.postgresql.engine_version
 }

@@ -1,7 +1,7 @@
 
 resource "aws_security_group" "public_sg" {
   vpc_id = aws_vpc.tf-vpc.id
-
+  description = "public ec2 security group"
   egress {
     from_port   = 0
     to_port     = 0
@@ -25,6 +25,7 @@ resource "aws_security_group" "public_sg" {
 
 resource "aws_security_group" "private_sg" {
     vpc_id = aws_vpc.tf-vpc.id
+    description = "Private ec2 security group"
     egress {
     from_port   = 0
     to_port     = 0
@@ -38,6 +39,7 @@ resource "aws_security_group" "private_sg" {
 }
 resource "aws_security_group" "lb_sg" {
     vpc_id = aws_vpc.tf-vpc.id
+    description = "ALB security group"
     egress {
     from_port   = 0
     to_port     = 0
@@ -57,6 +59,7 @@ resource "aws_security_group" "lb_sg" {
 }
 resource "aws_security_group" "rds_sg" {
     vpc_id = aws_vpc.tf-vpc.id
+    description = "RDS security group"
     egress {
     from_port   = 0
     to_port     = 0
