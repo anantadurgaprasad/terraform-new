@@ -14,4 +14,7 @@ module "launch-template" {
   ebs_volume_size = "${var.ebs-volume-size}"
   ebs_volume_type = "${var.ebs-volume-type}"
   ebs_volume_deletion_on_termination = "${var.ebs-volume-delete-on-termination}"
+  vpc-region = "${var.vpc-region}"
+  cloudwatch-name = module.cloudwatch-group.name
+  bucket-name = "${module.s3-bucket[0].s3-name}"
 }

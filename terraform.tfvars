@@ -21,10 +21,14 @@ max-size = "1"
 ebs-volume-size                 = "100"
 ebs-volume-type                 = "gp2"
 ebs-volume-delete-on-termination = "true"
-ec2-key-name = "prod-memberportal-team1-key-pair"
+##ec2-key-name = "prod-memberportal-team1-key-pair"
+ec2-key-name = "terraform-tokyo-key-pair"
 ##----bucket name---##
 buckets = ["cloudfront-s3"]
 
 ##----arn policies----##
 ec2-policy-arns = ["arn:aws:iam::aws:policy/AmazonS3FullAccess","arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"]
 cd-policy-arn = ["arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"]
+
+#-----cloudwatch-group--##
+cloudwatch-group-retention = 0

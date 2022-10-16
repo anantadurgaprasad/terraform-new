@@ -1,3 +1,10 @@
+locals {
+  vars = { vpc-region = "${var.vpc-region}" , 
+  cloudwatch_group_name="${var.cloudwatch-name}" ,
+   env = "${var.env}" , 
+   cloudfront-bucket-name = "${var.bucket-name}"}
+}
+
 resource "aws_launch_template" "lc" {
   name = "basic-lc"
   image_id = "${var.ami-id}"
@@ -29,6 +36,7 @@ resource "aws_launch_template" "lc" {
   lifecycle {
     create_before_destroy = true
   }
-
-  user_data =  filebase64("${path.module}/userdata.sh") 
+//pod-1-cloud-watch-group
+  //user_data =  filebase64("${path.module}/userdata.sh")
+  user_data = base64encode(templatefile("${path.module}/userdata.sh",local.vars )) 
 }

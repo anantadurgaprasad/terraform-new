@@ -80,3 +80,7 @@ variable "ebs-volume-delete-on-termination" {
 variable "ec2-key-name" {
   
 }
+
+variable "cloudwatch-group-retention" {
+  
+}

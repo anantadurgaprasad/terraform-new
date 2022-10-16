@@ -14,7 +14,7 @@ resource "aws_rds_cluster" "postgresql" {
   database_name           =  "${var.rds-db-name}"
   master_username         =  "${var.rds-username}"
   master_password         =   "${var.rds-psd}"
-  db_subnet_group_name = aws_db_subnet_group.default.name
+  db_subnet_group_name = aws_db_subnet_group.db_subnet_group.name
   vpc_security_group_ids = "${var.rds-sg}"
   skip_final_snapshot = true
 }

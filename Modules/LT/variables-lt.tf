@@ -29,3 +29,13 @@ variable "env" {
 variable "app-name" {
   
 }
+variable "vpc-region" {
+  
+}
+
+variable "cloudwatch-name" {
+  
+}
+variable "bucket-name" {
+  
+}
