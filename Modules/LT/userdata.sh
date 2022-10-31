@@ -22,12 +22,12 @@ sudo /usr/sbin/alternatives --set javac /usr/lib/jvm/java-11-openjdk-11.0.2.7-0.
 sudo groupadd --system tomcat
 sudo useradd -d /usr/share/tomcat -r -s /bin/false -g tomcat tomcat
 sudo yum -y install wget
-#wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.*/bin/apache-tomcat-*.tar.gz
-aws s3 cp s3://prod-memberportal-team1-cloudfront/apache-tomcat-8.5.83.tar.gz .
-sudo tar -xvf *.tar.gz -C /usr/share/
-sudo ln -s /usr/share/apache-tomcat-*/ /usr/share/tomcat
+wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.83/bin/apache-tomcat-8.5.83.tar.gz
+#aws s3 cp s3://prod-memberportal-team1-cloudfront/apache-tomcat-8.5.83.tar.gz .
+sudo tar -xvf apache-tomcat-8.5.83.tar.gz -C /usr/share/
+sudo ln -s /usr/share/apache-tomcat-8.5.83/ /usr/share/tomcat
 sudo chown -R tomcat:tomcat /usr/share/tomcat
-sudo chown -R tomcat:tomcat /usr/share/apache-tomcat-*/
+sudo chown -R tomcat:tomcat /usr/share/apache-tomcat-8.5.83/
 
 sudo cat >/etc/systemd/system/tomcat.service <<EOL
 [Unit]
@@ -66,7 +66,6 @@ CATALINA_OPTS="-Dlog4j2.formatMsgNoLookups=true"
 AWS_REGION=${vpc-region}
 EOL
 ## edit server.xml
-sudo sed -i 's/<Host name="localhost"  appBase="webapps" unpackWARs="true" autoDeploy="true">/<Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="false" deployOnStartup="false" > <Context path="" docBase="argus-aac-web"></Context>/g' /usr/share/tomcat/conf/server.xml
 
 
 sudo systemctl daemon-reload

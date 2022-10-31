@@ -18,11 +18,11 @@ instance-type = "t3.medium"
 desired-capacity = "1"
 min-size = "1"
 max-size = "1"
-ebs-volume-size                 = "100"
+ebs-volume-size                 = "8"
 ebs-volume-type                 = "gp2"
 ebs-volume-delete-on-termination = "true"
-##ec2-key-name = "prod-memberportal-team1-key-pair"
-ec2-key-name = "terraform-tokyo-key-pair"
+ec2-key-name = "prod-memberportal-team1-key-pair"
+# ec2-key-name = "terraform-tokyo-key-pair"
 ##----bucket name---##
 buckets = ["cloudfront-s3"]
 

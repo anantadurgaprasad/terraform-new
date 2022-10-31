@@ -1,4 +1,6 @@
 variable "env" {
+  type = string
+
   //default = "prod"
   
 }
@@ -22,6 +24,8 @@ variable "az" {
 }
 
 variable "public_subnets_cidr" {
+  type = list(string)
+  
   # count = 4
   # default = cidrsubnet("10.0.0.0/16",8,count+1)
   //default = ["10.0.1.0/24" , "10.0.2.0/24" , "10.0.3.0/24" , "10.0.4.0/24"]
