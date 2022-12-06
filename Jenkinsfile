@@ -17,6 +17,7 @@ pipeline{
       }
       steps{
         sh 'echo This is experiments branch'
+        sh 'echo hahaaaa.....'
         
       }
     
